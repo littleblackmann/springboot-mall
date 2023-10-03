@@ -1,5 +1,6 @@
 package com.ltiileblack.springbootmall.service.impl;
 
+import com.ltiileblack.springbootmall.constant.ProductCategory;
 import com.ltiileblack.springbootmall.dao.ProductDao;
 import com.ltiileblack.springbootmall.dto.ProductRequest;
 import com.ltiileblack.springbootmall.model.Product;
@@ -16,8 +17,8 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
 
     @Override
-    public List<Product> getProducts() {
-        return productDao.getProducts();
+    public List<Product> getProducts(ProductCategory category, String search) {
+        return productDao.getProducts(category,search);
     }
 
     @Override
