@@ -1,6 +1,7 @@
 package com.ltiileblack.springbootmall.controller;
 
 import com.ltiileblack.springbootmall.constant.ProductCategory;
+import com.ltiileblack.springbootmall.dto.ProductQueryParams;
 import com.ltiileblack.springbootmall.dto.ProductRequest;
 import com.ltiileblack.springbootmall.model.Product;
 import com.ltiileblack.springbootmall.service.ProductService;
@@ -23,7 +24,11 @@ public class ProductController {
             @RequestParam(required = false) ProductCategory category,
             @RequestParam(required = false) String search
     ) {
-        List<Product> productList = productService.getProducts(category, search);
+        ProductQueryParams productQueryParams = new ProductQueryParams();
+        productQueryParams.setCategory(category);
+        productQueryParams.setSearch(search);
+
+        List<Product> productList = productService.getProducts(productQueryParams);
 
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }
@@ -37,7 +42,6 @@ public class ProductController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-
     }
 
     @PostMapping("/products")
