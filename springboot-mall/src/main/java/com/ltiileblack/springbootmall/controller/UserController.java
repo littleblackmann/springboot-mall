@@ -1,5 +1,6 @@
 package com.ltiileblack.springbootmall.controller;
 
+import com.ltiileblack.springbootmall.dto.UserLoginRequest;
 import com.ltiileblack.springbootmall.dto.UserRegisterRequest;
 import com.ltiileblack.springbootmall.model.User;
 import com.ltiileblack.springbootmall.service.UserService;
@@ -25,5 +26,12 @@ public class UserController {
         User user = userService.getUserById(userId);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }
+
+    @PostMapping("/users/login")
+    public ResponseEntity<User> login(@RequestBody @Valid UserLoginRequest userLoginRequest) {
+        User user = userService.login(userLoginRequest);
+
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 }
